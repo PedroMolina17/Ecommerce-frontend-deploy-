@@ -14,9 +14,9 @@ interface Product {
   name: string;
   imagen: string;
   salePrice: number;
-  ProductCoverImage: any;
   descripcion: string;
   rating: number;
+  ProductCoverImage: any;
 }
 
 const Products = () => {
@@ -88,7 +88,7 @@ const Products = () => {
   return (
     products && (
       <div className="grid grid-cols-4 gap-y-12 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2 mt-16">
-        {products.map((product) => (
+        {products.map((product): any => (
           <div key={product.id} className="col-span-1 border rounded-md group">
             <div className="border-b-4 flex justify-center items-center  ">
               <img
@@ -108,7 +108,7 @@ const Products = () => {
               <p className="text-[#139dba] font-bold">${product.salePrice}</p>
               <button
                 className="py-2 text-center bg-[#cccccc] rounded-md min-w-8"
-                onClick={() => navigateToProductDetails(product?.id)}
+                onClick={() => navigateToProductDetails(product.id)}
               >
                 Ver Mas
               </button>
