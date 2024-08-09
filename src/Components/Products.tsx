@@ -14,6 +14,7 @@ interface Product {
   name: string;
   imagen: string;
   salePrice: number;
+  ProductCoverImage: any;
   descripcion: string;
   rating: number;
 }
