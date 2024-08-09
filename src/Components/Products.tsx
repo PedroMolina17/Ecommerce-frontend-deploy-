@@ -5,7 +5,7 @@ import { useProduct } from "../hooks/useProducts";
 import { useEffect, useState } from "react";
 import { useCart } from "@/hooks/useCart";
 import { jwtDecode } from "jwt-decode";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 import Cookies from "js-cookie";
 
