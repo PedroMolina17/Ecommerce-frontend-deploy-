@@ -11,9 +11,9 @@ import Cookies from "js-cookie";
 
 interface Product {
   id: number;
-  nombre: string;
+  name: string;
   imagen: string;
-  price: number;
+  salePrice: number;
   descripcion: string;
   rating: number;
 }
@@ -23,7 +23,7 @@ const Products = () => {
   const [userName, setUserName] = useState<string | null>(null);
   const { useGetCart } = useCart();
   const { useGetAllProducts } = useProduct();
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const { data: dataProducts, isLoading: isLoadingProducts } =
     useGetAllProducts();
   const { data: dataCart } = useGetCart(Number(userId));
@@ -107,7 +107,7 @@ const Products = () => {
               <p className="text-[#139dba] font-bold">${product.salePrice}</p>
               <button
                 className="py-2 text-center bg-[#cccccc] rounded-md min-w-8"
-                onClick={() => navigateToProductDetails(product.id)}
+                onClick={() => navigateToProductDetails(product?.id)}
               >
                 Ver Mas
               </button>
