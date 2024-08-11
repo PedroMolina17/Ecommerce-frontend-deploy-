@@ -15,7 +15,13 @@ export const useCart = () => {
     });
 
   const addCartMutation = useMutation({
-    mutationFn: (data) => createCart(data),
+    mutationFn: (data: {
+      cartId: number;
+      productId: number;
+      quantity: number;
+      unitPrice: number;
+      totalItemPrice: number;
+    }) => createCart(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
       toast.success("Producto Añadido");

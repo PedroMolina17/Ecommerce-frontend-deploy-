@@ -21,7 +21,6 @@ interface Product {
 
 const Products = () => {
   const [userId, setUserId] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
   const { useGetCart } = useCart();
   const { useGetAllProducts } = useProduct();
   const [products, setProducts] = useState<Product[]>([]);
@@ -32,7 +31,16 @@ const Products = () => {
   const { addCartMutation } = useCart();
   useEffect(() => {
     if (!isLoadingProducts && dataProducts) {
-      setProducts(dataProducts.results);
+      const transformedProducts = dataProducts.results.map((result: any) => ({
+        id: result.id,
+        name: result.name,
+        imagen: result.imagen,
+        salePrice: result.salePrice ?? 0,
+        descripcion: result.descripcion,
+        rating: result.rating ?? 0,
+        ProductCoverImage: result.ProductCoverImage || null,
+      }));
+      setProducts(transformedProducts);
     }
   }, [isLoadingProducts, dataProducts]);
   const renderStars = (rating: number) => {
@@ -58,14 +66,10 @@ const Products = () => {
     if (userCookie) {
       try {
         const decodedToken: any = jwtDecode(userCookie);
-        setUserName(decodedToken.user.userName || "User");
         setUserId(decodedToken.user.id || "id");
       } catch (error) {
         console.error("Error al decodificar el token", error);
-        setUserName(null);
       }
-    } else {
-      setUserName(null);
     }
   }, []);
 
