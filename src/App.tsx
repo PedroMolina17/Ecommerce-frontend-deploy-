@@ -8,38 +8,26 @@ import Deals from "./Components/Deals";
 import Electronic from "./Components/Electronic";
 import Cellphones from "./Components/Cellphones";
 import Login from "./Components/Admin/login/Login";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Dashboard from "./pages/admin/Dashboard";
-export const queryClient = new QueryClient();
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
+    <Router>
+      <Routes>
+        <Navigation />
         <Routes>
-          <Route
-            path="/*"
-            element={
-              <>
-                <Navigation />
-                <Routes>
-                  <Route path="/" element={<Slider />} />
-                  <Route path="/signup" element={<SingUp />} />
-                  <Route path="/blogs" element={<Blogs />} />
-                  <Route path="/accesories" element={<Acessories />} />
-                  <Route path="/deals" element={<Deals />} />
-                  <Route path="/electronics" element={<Electronic />} />
-                  <Route path="/cellphones" element={<Cellphones />} />
-                </Routes>
-              </>
-            }
-          />
-          <Route path="/admin/*" element={<AdminLayout />} />
-          <Route path="/adminLogin/*" element={<Login />} />
+          <Route path="/" element={<Slider />} />
+          <Route path="/signup" element={<SingUp />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/accesories" element={<Acessories />} />
+          <Route path="/deals" element={<Deals />} />
+          <Route path="/electronics" element={<Electronic />} />
+          <Route path="/cellphones" element={<Cellphones />} />
         </Routes>
-      </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+
+        <Route path="/admin/*" element={<AdminLayout />} />
+        <Route path="/adminLogin/*" element={<Login />} />
+      </Routes>
+    </Router>
   );
 }
 
