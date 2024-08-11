@@ -11,4 +11,8 @@ export default defineConfig({
       "@ui": path.resolve(__dirname, "src/Components/ui"),
     },
   },
+  build: {
+    minify: "esbuild",
+    sourcemap: false,
+  },
 });
