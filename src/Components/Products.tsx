@@ -12,11 +12,11 @@ import Cookies from "js-cookie";
 interface Product {
   id: number;
   name: string;
-  imagen: string;
+  imagen?: string;
   salePrice: number;
-  descripcion: string;
+  descripcion?: string;
   rating: number;
-  ProductCoverImage: any;
+  ProductCoverImage?: any | null;
 }
 
 const Products = () => {
@@ -72,7 +72,7 @@ const Products = () => {
   const navigate = useNavigate();
   const handleAddToCart = (product: Product) => {
     const cartItemData = {
-      cartId: firstCart,
+      cartId: firstCart as number,
       productId: product.id,
       quantity: 1,
       unitPrice: product.salePrice,
