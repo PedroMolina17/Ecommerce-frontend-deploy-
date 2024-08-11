@@ -7,13 +7,13 @@ const Product = () => {
 
   return (
     <div>
-      {operation === "CreateProduct" ? (
+      {operation === "Create" ? (
         <div>
           <CreateProduct />
         </div>
       ) : operation === "ViewProduct" ? (
         <ProductsTable />
-      ) : operation === "UpdateProduct" ? (
+      ) : operation === "Edit" ? (
         <UpdateProduct productId={productId} />
       ) : (
         <div>

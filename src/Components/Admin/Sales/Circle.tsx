@@ -1,10 +1,4 @@
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  PluginOptionsByType,
-} from "chart.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { ChartOptions } from "chart.js/auto";
 
@@ -35,7 +29,7 @@ const options: ChartOptions<"doughnut"> = {
           console.log(`Clic en la leyenda: ${legendItem.text}`);
           console.log(`Índice de la leyenda: ${legendItem.index}`);
           console.log(
-            `Estado de la leyenda: ${legendItem.hidden ? "oculto" : "visible"}`,
+            `Estado de la leyenda: ${legendItem.hidden ? "oculto" : "visible"}`
           );
           console.log(`Lista de todas las leyendas:`, legend.legendItems);
         }

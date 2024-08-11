@@ -1,5 +1,4 @@
 import { PaginationState } from "@tanstack/react-table";
-import React from "react";
 interface RowSelectorProps {
   pagination: PaginationState;
   handlePagination: (pagination: PaginationState) => void;

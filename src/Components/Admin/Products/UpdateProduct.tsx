@@ -1,14 +1,14 @@
-import { FaImage } from "react-icons/fa";
+// import { FaImage } from "react-icons/fa";
 import {
   MdOutlineAttachMoney,
   MdOutlineProductionQuantityLimits,
   MdLocalOffer,
   MdOutlineLocalOffer,
 } from "react-icons/md";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { getAllCategory } from "../../../api/category";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { useImageCover } from "@/hooks/useImageCover";
 
 // import {
@@ -19,11 +19,14 @@ import { updateProduct, getProductById } from "../../../api/products";
 import { getAllBrands } from "../../../api/brands";
 import { useOpenFormStoreProduct } from "./store/ActionStore";
 import useProductStore from "./store/ProductStore";
+import { IDUpdateProduct } from "@/types/products.type";
 
-const UpdateProduct = ({ productId }) => {
-  const queryClient = useQueryClient();
+interface UpdateProductProps {
+  productId: number;
+}
+const UpdateProduct: React.FC<UpdateProductProps> = ({ productId }) => {
   const { updateImageCoverMutation } = useImageCover();
-  const { operation, setOperation } = useProductStore();
+  const { setOperation } = useProductStore();
 
   interface FormularioProductoProps {
     id: number;
@@ -47,8 +50,7 @@ const UpdateProduct = ({ productId }) => {
 
   //Crear Categoria
   const updateProductMutation = useMutation({
-    mutationFn: async (data) => await updateProduct(data),
-    onSuccess: (data) => console.log(data.id + 8),
+    mutationFn: async (data: IDUpdateProduct) => await updateProduct(data),
   });
 
   //Obtener product por Id
@@ -72,28 +74,27 @@ const UpdateProduct = ({ productId }) => {
   const brands = brandsData?.data || [];
 
   //Leer y Mostar imagen
-  const fileInputRef = useRef(null);
-  const [previewImage, setPreviewImage] = useState(null);
+  // const fileInputRef = useRef(null);
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
+  // const handleButtonClick = () => {
+  //   fileInputRef.current.click();
+  // };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      setPreviewImage(reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setPreviewImage(reader.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
 
   //Cambiar vista
-  const toggleView = (operation: string) => {
+  const toggleView = (operation: any) => {
     setOperation(operation);
   };
   //Enviar Datos
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     try {
       const {
         name,
@@ -110,7 +111,7 @@ const UpdateProduct = ({ productId }) => {
       } = data;
 
       const updatedDataProduct: any = {
-        id: parseInt(productId, 10),
+        id: Number(productId),
         name,
         categoryId: parseInt(categoryId, 10),
         purchasePrice,
@@ -329,7 +330,7 @@ const UpdateProduct = ({ productId }) => {
               <div className="flex flex-col gap-8 my-8">
                 <label className="flex flex-col gap-2">
                   Imagen de Portada
-                  <button
+                  {/* <button
                     className="text-darkPrimary flex text-4xl justify-center items-center border h-24 border-darkPrimary"
                     onClick={handleButtonClick}
                   >
@@ -349,7 +350,7 @@ const UpdateProduct = ({ productId }) => {
                       className="hidden"
                       onChange={handleFileChange}
                     ></input>
-                  </button>
+                  </button> */}
                 </label>
                 <input className="hidden" {...register("imageId")}></input>
                 <input type="file" {...register("imageProductCover")}></input>

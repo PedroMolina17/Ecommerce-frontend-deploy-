@@ -35,16 +35,17 @@ export interface Data {
 }
 export interface ICreateProduct {
   name: string;
-  categoryId: number;
-  price: number;
-  image: File;
   description: string;
+  salePrice: number;
+  purchasePrice: number;
   stock: number;
-  status: boolean;
   promotion: boolean;
   promotionPrice: number;
   promotionDescription?: string;
+  categoryId: number;
   brandId: number;
+  active: boolean;
+  status: boolean;
 }
 export interface IResponseCreateProduct extends Response {
   data: Data;

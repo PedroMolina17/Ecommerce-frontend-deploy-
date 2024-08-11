@@ -4,7 +4,10 @@ import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
-const DeleteProduct = ({ onDelete }) => {
+interface DeleteProductProps {
+  onDelete: () => void;
+}
+const DeleteProduct: React.FC<DeleteProductProps> = ({ onDelete }) => {
   useEffect(() => {
     MySwal.fire({
       title: "Are you sure?",

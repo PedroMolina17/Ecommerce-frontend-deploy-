@@ -12,7 +12,7 @@ const ElectronicDetails = () => {
   } = useQuery({
     queryKey: ["productById", id],
     queryFn: () =>
-      id ? getProductById(id) : Promise.reject("ID is undefined"),
+      id ? getProductById(Number(id)) : Promise.reject("ID is undefined"),
     enabled: !!id,
   });
 

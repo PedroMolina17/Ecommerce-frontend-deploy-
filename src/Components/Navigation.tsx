@@ -11,10 +11,10 @@ import { loginUser } from "@/api/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
-import { useImageCover } from "../hooks/useImageCover";
+// import { useImageCover } from "../hooks/useImageCover";
 import { useCart } from "@/hooks/useCart";
 interface FormValue {
   email: string;
@@ -29,7 +29,7 @@ const Navigation = () => {
   const { useGetCart, updateCartMutation } = useCart();
   const [userId, setUserId] = useState<string | null>(null);
   const { data: dataCart } = useGetCart(Number(userId));
-  const { updateImageCoverMutation } = useImageCover();
+  // const { updateImageCoverMutation } = useImageCover();
   const { register, handleSubmit } = useForm<FormValue>({
     defaultValues: { email: "vitor.dupuis@example.com", password: "figoncjd" },
   });
@@ -284,7 +284,7 @@ const Navigation = () => {
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
-                        {firstCart.cartItem.map((item) => (
+                        {firstCart.cartItem.map((item: any) => (
                           <tr key={item.id}>
                             <td className="px-6 py-4 whitespace-nowrap max-md:flex max-md:flex-col">
                               <p> {item.product.name}</p>{" "}
@@ -320,15 +320,12 @@ const Navigation = () => {
                       </tbody>
                       <tfoot className="bg-gray-50">
                         <tr>
-                          <td
-                            colSpan="3"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                          >
+                          <td className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Total General
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             {firstCart.cartItem.reduce(
-                              (total, item) =>
+                              (total: any, item: any) =>
                                 total + item.quantity * item.unitPrice,
                               0
                             )}

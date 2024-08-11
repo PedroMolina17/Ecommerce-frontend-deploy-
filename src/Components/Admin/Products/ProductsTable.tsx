@@ -9,33 +9,23 @@ import {
   getFilteredRowModel,
   //Cell,
 } from "@tanstack/react-table";
-import { Row } from "@tanstack/react-table";
 import { useOpenFormStoreProduct } from "./store/ActionStore";
 import { useState } from "react";
 //import { useForm } from "react-hook-form";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import ResponsivePagination from "react-responsive-pagination";
-import { FaSearch } from "react-icons/fa";
 import { IoAddCircle } from "react-icons/io5";
-import Products from "./Products";
-import DeleteProduct from "./DeleteProduct";
 import { MdDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { useMutation } from "@tanstack/react-query";
-import CreateProduct from "./CreateProduct";
 import { MdPersonSearch } from "react-icons/md";
 
 import useProductStore from "./store/ProductStore";
 const ProductsTable = () => {
   const [sorting, setSorting] = useState<ColumnSort[]>([]);
-  const { openForm, setOpenForm } = useOpenFormStoreProduct();
+  const { setOpenForm } = useOpenFormStoreProduct();
 
-  const { operation, setOperation, setProductId } = useProductStore();
-  interface ProductRow {
-    id: number;
-    name: string;
-    stock: number;
-  }
+  const { setOperation, setProductId } = useProductStore();
 
   const [filtering, setFiltering] = useState("");
   const [pagination, setPagination] = useState<PaginationState>({
@@ -152,9 +142,9 @@ const ProductsTable = () => {
           ))}
         </thead>
         <tbody className="table-body text-slate-400 font-normal text-md">
-          {table.getRowModel().rows.map((row) => (
+          {table.getRowModel().rows.map((row: any) => (
             <tr key={row.id}>
-              {row.getVisibleCells().map((cell, index) => (
+              {row.getVisibleCells().map((cell: any, index: any) => (
                 <td key={cell.id} className="text-center p-3 h-16">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}{" "}
                   {index === columns.length - 1 && (

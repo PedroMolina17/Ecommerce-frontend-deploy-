@@ -1,4 +1,3 @@
-import { BsArrowLeftShort } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import {
   FaBookOpen,
@@ -12,7 +11,7 @@ import ButonSideBar from "./ButonSideBar";
 import ContainerButton from "./ContainerButton";
 import { useSelectNavStore } from "./store/useSelectNav";
 
-const Sidebar = ({ isOpen, setIsOpen }: any) => {
+const Sidebar = ({ isOpen }: any) => {
   const { setSelectNav } = useSelectNavStore((state) => state);
 
   return (

@@ -1,53 +1,46 @@
-import { FaImage } from "react-icons/fa";
+// import { FaImage } from "react-icons/fa";
 import {
   MdOutlineAttachMoney,
   MdOutlineProductionQuantityLimits,
   MdLocalOffer,
   MdOutlineLocalOffer,
 } from "react-icons/md";
-import { useRef, useState } from "react";
 import { getAllCategory } from "../../../api/category";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  IResponseCreateProduct,
-  IcreateProduct,
-} from "../../../types/products.type";
+import { ICreateProduct } from "@/types/products.type";
 import { createProduct } from "../../../api/products";
 import { getAllBrands } from "../../../api/brands";
 import { useOpenFormStoreProduct } from "./store/ActionStore";
-import useProductStore from "./store/ProductStore";
 import { useImageCover } from "@/hooks/useImageCover";
+import useProductStore from "./store/ProductStore";
+
 const CreateProduct = () => {
   const { handleSubmit, register, reset } = useForm<FormularioProductoProps>();
   const { setOpenForm } = useOpenFormStoreProduct();
-  const queryClient = useQueryClient();
-  const { operation, setOperation } = useProductStore();
+  const { setOperation } = useProductStore();
   const { createImageCoverMutation } = useImageCover();
 
   interface FormularioProductoProps {
     id: number;
     name: string;
-    categoryId: number;
-    price: any;
-    image: string | null;
-    categories: { id: number; name: string }[];
     description: string;
+    salePrice: number;
+    purchasePrice: number;
     stock: number;
-    status: boolean;
     promotion: boolean;
     promotionPrice: number;
     promotionDescription?: string;
-    imageProductCover: any;
-    purchasePrice: any;
-    saleprice: any;
+    categoryId: number;
     brandId: number;
-    brands: { id: number; name: string }[];
+    active: boolean;
+    status: boolean;
+    image: any;
   }
 
   //Crear Categoria
   const createProductMutation = useMutation({
-    mutationFn: async (data) => await createProduct(data),
+    mutationFn: async (data: ICreateProduct) => await createProduct(data),
     onSuccess: (data) => console.log(data),
   });
   //Obtener Categoria
@@ -65,43 +58,40 @@ const CreateProduct = () => {
   const brands = brandsData?.data || [];
 
   //Leer y Mostar imagen
-  const fileInputRef = useRef(null);
-  const [previewImage, setPreviewImage] = useState(null);
+  // const fileInputRef = useRef(null);
+  // const [previewImage, setPreviewImage] = useState(null);
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
-  interface CreateImageCoverPayload {
-    id: number; // Product ID
-    imageData: File; // Image file
-  }
+  // const handleButtonClick = () => {
+  //   fileInputRef.current.click();
+  // };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      setPreviewImage(reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
+  // const handleFileChange = (event: any) => {
+  //   const file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setPreviewImage(reader.result);
+  //   };
+  //   reader.readAsDataURL(file);
+  // };
 
   //Cambiar vista
-  const toggleView = (operation: string) => {
+  const toggleView = (operation: any) => {
     setOperation(operation);
   };
+
   //Enviar Datos
   const onSubmit: SubmitHandler<FormularioProductoProps> = async (data) => {
     const productData = {
       name: data.name,
       description: data.description,
-      salePrice: parseFloat(data.price),
+      salePrice: Number(data.salePrice),
       purchasePrice: 500,
-      stock: parseInt(data.stock, 10),
+      stock: Number(data.stock),
       promotion: data.promotion,
-      promotionPrice: parseFloat(data.promotionPrice),
+      promotionPrice: Number(data.promotionPrice),
       promotionDescription: data.promotionDescription || "",
-      categoryId: parseInt(data.categoryId, 10),
-      brandId: parseInt(data.brandId, 10),
+      categoryId: Number(data.categoryId),
+      brandId: Number(data.brandId),
       active: true,
       status: true,
     };
@@ -174,7 +164,9 @@ const CreateProduct = () => {
                       <MdOutlineAttachMoney /> Precio
                     </div>
                     <input
-                      {...register("price", { required: "Campo obligatorio" })}
+                      {...register("salePrice", {
+                        required: "Campo obligatorio",
+                      })}
                       type="number"
                       className="w-96 rounded-sm text-black p-1"
                       placeholder="$0.00"
@@ -270,7 +262,7 @@ const CreateProduct = () => {
               <div className="flex flex-col gap-8 my-8">
                 <label className="flex flex-col gap-2">
                   Imagen de Portada
-                  <button
+                  {/* <button
                     className="text-darkPrimary flex text-4xl justify-center items-center border h-24 border-darkPrimary"
                     onClick={handleButtonClick}
                   >
@@ -313,7 +305,7 @@ const CreateProduct = () => {
                       className="hidden"
                       onChange={handleFileChange}
                     ></input>
-                  </button>
+                  </button> */}
                   <input
                     type="file"
                     {...register("image", { required: true })}
