@@ -57,7 +57,7 @@ const ProductsTable = () => {
   });
 
   const UpdateProductVIew = (id: number) => {
-    setOperation("UpdateProduct");
+    setOperation("Edit");
     setProductId(id);
   };
 
