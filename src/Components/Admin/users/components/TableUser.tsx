@@ -21,7 +21,6 @@ const TableUser = ({ data }: TableUserProps) => {
   const mutation = useMutation({
     mutationFn: async (id: number) => await deleteUserById(id),
     onSuccess: (data) => {
-      console.log("data-->", data);
       notify(data.message);
       queryClient.refetchQueries({ queryKey: ["users"] });
     },

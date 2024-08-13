@@ -20,7 +20,7 @@ const Product = () => {
           <div>No product ID available for editing</div>
         )
       ) : (
-        <CreateProduct />
+        <CreateProduct /> 
       )}
     </div>
   );

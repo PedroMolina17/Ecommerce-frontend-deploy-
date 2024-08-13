@@ -41,7 +41,6 @@ const CreateProduct = () => {
   //Crear Categoria
   const createProductMutation = useMutation({
     mutationFn: async (data: ICreateProduct) => await createProduct(data),
-    onSuccess: (data) => console.log(data),
   });
   //Obtener Categoria
   const { data: categoriesData } = useQuery({

@@ -53,7 +53,6 @@ const FormularioProducto: React.FC<FormularioProductoProps> = () => {
     const obtenerCategorias = async () => {
       try {
         const response = await axios.get(`${url}/api/category/categories`);
-        console.log(response);
 
         if (response.data && Array.isArray(response.data.data)) {
           setState((prevState) => ({

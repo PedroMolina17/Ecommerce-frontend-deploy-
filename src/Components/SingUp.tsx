@@ -24,10 +24,8 @@ const SingUp = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  console.log(errors);
   const url = import.meta.env.VITE_URL_FRONTEND;
   const onSubmit = async (data: FormData) => {
-    console.log(data);
     try {
       const response = await axios.post(`${url}/api/auth/register`, {
         userName: data.userName,
