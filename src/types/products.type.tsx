@@ -49,7 +49,7 @@ export interface ICreateProduct {
 }
 export interface IResponseCreateProduct extends Response {
   data: Data;
-  message: string;
+  product: any;
 }
 export interface IDUpdateProduct {
   id: number;

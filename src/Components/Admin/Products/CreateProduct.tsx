@@ -94,27 +94,27 @@ const CreateProduct = () => {
       active: true,
       status: true,
     };
-    createProductMutation.mutate(productData);
+    createProductMutation.mutate(productData, {
+      onSuccess: (response) => {
+        const id: number = response.product.id;
+        if (data.image && data.image[0] && id) {
+          const formData = new FormData();
+          formData.append("imageProductCover", data.image[0]);
+          const imageCoverPayload = {
+            id: id,
+            data: formData,
+          };
 
-    if (data.image && data.image[0]) {
-      const formData = new FormData();
-      formData.append("imageProductCover", data.image[0]);
-
-      const imageCoverPayload = {
-        id: data.id,
-        data: formData,
-      };
-
-      createImageCoverMutation.mutate(imageCoverPayload);
-      reset();
-    } else {
-      console.log("No file selected.");
-    }
+          createImageCoverMutation.mutate(imageCoverPayload);
+        }
+        reset();
+        toggleView("ViewProduct");
+      },
+    });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="hidden" {...register("id")}></input>
       <div className="flex text-darkSecondary flex-col">
         <div className="flex justify-between items-center">
           <h1 className="text-4xl block my-4">Add Product</h1>
