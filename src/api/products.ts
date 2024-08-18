@@ -11,7 +11,7 @@ import {
 
 const getAllProducts = async (
   page: number = 1,
-  pageSize: number = 10
+  pageSize: number = 30
 ): Promise<Product> => {
   const { data }: AxiosResponse<Product> = await api.get(
     `product/products?page=${page}&pageSize=${pageSize}`

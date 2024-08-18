@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/hooks/useCart";
 import { jwtDecode } from "jwt-decode";
 import { Toaster } from "react-hot-toast";
-
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import Cookies from "js-cookie";
 
 interface Product {
@@ -29,6 +29,7 @@ const Products = () => {
   const { data: dataCart } = useGetCart(Number(userId));
   const firstCart = dataCart ? dataCart.userCart[0]?.id : null;
   const { addCartMutation } = useCart();
+
   useEffect(() => {
     if (!isLoadingProducts && dataProducts) {
       const transformedProducts = dataProducts.results.map((result: any) => ({
@@ -43,6 +44,7 @@ const Products = () => {
       setProducts(transformedProducts);
     }
   }, [isLoadingProducts, dataProducts]);
+
   const renderStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -95,11 +97,10 @@ const Products = () => {
         {products.map((product): any => (
           <div key={product.id} className="col-span-1 border rounded-md group">
             <div className="border-b-4 flex justify-center items-center  ">
-              <img
-                src={
-                  product.ProductCoverImage?.imageProduct ||
-                  "fallback-image-url"
-                }
+              <LazyLoadImage
+                src={product.ProductCoverImage?.imageProduct}
+                placeholderSrc="/public/images/placeholderProducts.png"
+                effect="blur"
                 alt={product.name}
                 className="rounded-md h-40 object-contain transition-transform transform group-hover:scale-110 group-hover:-translate-y-8"
               />
