@@ -32,7 +32,7 @@ const DashboardLayout = () => {
   return (
     <>
       {authenticate ? (
-        <div className="grid grid-cols grid-rows-12 w-full bg-bg">
+        <div className="grid grid-cols grid-rows-12 w-full h-screen bg-darkPrimary">
           <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
           <NavBar />
           <main

@@ -1,3 +1,4 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
 const Blogs = () => {
   interface MyObject {
     id: number;
@@ -62,7 +63,7 @@ const Blogs = () => {
               className="bg-white border rounded-tr-md rounded-tl-md flex flex-col "
             >
               <div className="relative">
-                <img
+                <LazyLoadImage
                   src={product.image}
                   alt={product.title}
                   className="rounded-tr-md rounded-tl-md object-cover object-center h-96 w-full  min-w-44"

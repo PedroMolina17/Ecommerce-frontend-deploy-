@@ -1,13 +1,14 @@
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { useProduct } from "../hooks/useProducts";
+import { useProduct } from "../../hooks/useProducts";
 import { useEffect, useState } from "react";
 import { useCart } from "@/hooks/useCart";
 import { jwtDecode } from "jwt-decode";
 import { Toaster } from "react-hot-toast";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Cookies from "js-cookie";
+import SkeletonProduct from "./SkeletonProducts";
 
 interface Product {
   id: number;
@@ -91,7 +92,13 @@ const Products = () => {
     navigate(`/electronics/${productId.toString()}`);
   };
 
-  return (
+  return isLoadingProducts ? (
+    <div className="w-full grid grid-cols-4 gap-y-12 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2 mt-16 h-svh">
+      {Array.from({ length: 24 }).map((_, index) => (
+        <SkeletonProduct key={index} />
+      ))}
+    </div>
+  ) : (
     products && (
       <div className="grid grid-cols-4 gap-y-12 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2 mt-16">
         {products.map((product): any => (
@@ -100,7 +107,6 @@ const Products = () => {
               <LazyLoadImage
                 src={product.ProductCoverImage?.imageProduct}
                 placeholderSrc="/public/images/placeholderProducts.png"
-                effect="blur"
                 alt={product.name}
                 className="rounded-md h-40 object-contain transition-transform transform group-hover:scale-110 group-hover:-translate-y-8"
               />

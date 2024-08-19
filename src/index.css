@@ -8,7 +8,7 @@
 /* css react responsive pagination */
 body {
   @apply h-screen w-full;
-  background-color: #272743;
+  background-color: white;
 }
 .pagination {
   display: flex;

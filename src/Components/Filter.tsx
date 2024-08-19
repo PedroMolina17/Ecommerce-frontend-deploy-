@@ -1,7 +1,7 @@
 import { PiList } from "react-icons/pi";
 import { IoReorderFourSharp } from "react-icons/io5";
 import { LiaGripLinesVerticalSolid } from "react-icons/lia";
-import Products from "./Products";
+import Products from "./Products/Products";
 const Filter = () => {
   return (
     <div className="md:ml-4 max-sm:mx-9 max-md:mx-4">
