@@ -100,7 +100,7 @@ const Products = () => {
     </div>
   ) : (
     products && (
-      <div className="grid grid-cols-4 gap-y-12 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2 mt-16">
+      <div className="grid grid-cols-4 gap-y-12 max-md:grid-cols-2 max-sm:grid-cols-1 gap-2 mt-16 w-full">
         {products.map((product): any => (
           <div key={product.id} className="col-span-1 border rounded-md group">
             <div className="border-b-4 flex justify-center items-center  ">

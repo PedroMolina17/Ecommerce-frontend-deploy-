@@ -4,7 +4,12 @@ import { FaMoon, FaCartShopping } from "react-icons/fa6";
 import { IoIosNotifications } from "react-icons/io";
 import { IoExit } from "react-icons/io5";
 import Circle from "./Circle";
+import { useProduct } from "@/hooks/useProducts";
+
 const Sales = () => {
+  const { useGetAllProducts } = useProduct();
+  const { data: dataProducts } = useGetAllProducts();
+
   return (
     <div className=" w-full text-darkSecondary">
       <div className="flex p-8 items-center text-xl gap-10  ">
@@ -33,7 +38,7 @@ const Sales = () => {
           <div className="col-span-1 bg-gradient-to-r from-[#ef6e94] via-[#f789a4] to-[#fda0b2] rounded-md flex p-4  justify-around h-32">
             <div className="flex flex-col justify-end ">
               <p className="text-md">Productos Totales</p>
-              <p className="text-2xl font-bold">$278</p>
+              <p className="text-2xl font-bold">{dataProducts?.info?.count}</p>
               <p className="text-md">+ 50% nuevos productos</p>
             </div>
             <FaPercentage className="text-2xl text-darkSecondary" />
