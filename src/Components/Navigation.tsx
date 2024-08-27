@@ -26,9 +26,10 @@ const Navigation = () => {
   const [menuMobile, setMenuMobile] = useState(true);
   const [numberProducts, setNumberProducts] = useState<number>(0);
   const [userName, setUserName] = useState<string | null>(null);
-  const { useGetCart, updateCartMutation } = useCart();
   const [userId, setUserId] = useState<string | null>(null);
-  const { data: dataCart } = useGetCart(Number(userId));
+  const { useGetCart, updateCartMutation } = useCart();
+  const { data: dataCart } = useGetCart(userId ? Number(userId) : null);
+
   // const { updateImageCoverMutation } = useImageCover();
   const { register, handleSubmit } = useForm<FormValue>({
     defaultValues: { email: "vitor.dupuis@example.com", password: "figoncjd" },
@@ -85,7 +86,10 @@ const Navigation = () => {
       console.error(error);
     },
   });
-  const firstCart = dataCart ? dataCart.userCart[0] : null;
+
+  let firstCart = null;
+
+  firstCart = dataCart ? dataCart.userCart[0] : null;
 
   const onSubmit = handleSubmit((values) => {
     loginMutation.mutate(values);

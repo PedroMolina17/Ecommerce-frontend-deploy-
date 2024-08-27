@@ -8,10 +8,11 @@ import toast from "react-hot-toast";
 export const useCart = () => {
   const queryClient = useQueryClient();
 
-  const useGetCart = (id: number) =>
+  const useGetCart = (id: number | null) =>
     useQuery({
       queryKey: ["cart", id],
       queryFn: () => getCart(id),
+      enabled: !!id,
     });
 
   const addCartMutation = useMutation({

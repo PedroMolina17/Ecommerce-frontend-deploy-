@@ -55,7 +55,7 @@ const deleteProduct = async (
   }
 };
 
-const getCart = async (id: number) => {
+const getCart = async (id: number | null) => {
   try {
     const { data } = await api.get(`/cart/get-cart/${id}`);
     return data;
