@@ -87,7 +87,7 @@ const Navigation = () => {
     },
   });
 
-  let firstCart = null;
+  let firstCart: any = null;
 
   firstCart = dataCart ? dataCart.userCart[0] : null;
 
